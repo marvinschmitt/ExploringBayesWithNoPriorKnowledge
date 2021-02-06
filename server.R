@@ -77,7 +77,7 @@ server = function(input, output, session) {
       # axes and labels
       scale_x_continuous(expand=c(0,0))+
       scale_y_continuous(expand = c(0.000, 0), limits = c(0, 1.05*YMAX))+
-      labs(title=PLOT_TITLE, y="density", x="Sidney's diagnostic power P")+
+      labs(title=PLOT_TITLE, y="density", x="Sidney's diagnostic accuracy P")+
       
       # maximum prior/likelihood/posterior dashed lines
       geom_segment(aes(x = Max_Prior["x"] , y = 0, xend = Max_Prior["x"], yend = Max_Prior["y"]), colour=PRIOR_COLOR, lwd=0.6, linetype="dotted")+

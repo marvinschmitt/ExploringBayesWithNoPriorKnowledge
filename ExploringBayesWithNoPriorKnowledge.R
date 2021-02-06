@@ -26,7 +26,7 @@ setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 
 #::: UNCOMMENT AND EXECUTE THE DESIRED ACTION :::
 # runApp()
-# deployApp()
+deployApp()
 # terminateApp('ExploringBayesWithNoPriorKnowledge')
 
 ###:###:###:###:###:###:###:###:### END SECTION
@@ -198,7 +198,7 @@ p.physician = ggplot(df.physician)+
   
   scale_x_continuous(expand=c(0,0))+
   scale_y_continuous(expand = c(0.000, 0), limits = c(0, 1.05*max(c(prior, likelihood, posterior))))+
-  labs(title=PHYS.TITLE, y="density", x="Sidney's diagnostic power P")+
+  labs(title=PHYS.TITLE, y="density", x="Sidney's diagnostic accuracy P")+
   
   geom_segment(aes(x = x[which.max(prior)] , y = 0, xend = x[which.max(prior)], yend = max(prior)), colour=PRIOR_COLOR, lwd=0.6, linetype="dotted")+
   geom_segment(aes(x = x[which.max(likelihood)] , y = 0, xend = x[which.max(likelihood)], yend = max(likelihood)), colour=LIKELIHOOD_COLOR, lwd=0.6, linetype="dotted")+
@@ -264,7 +264,7 @@ for (i in 1:N_UPDATING_ITERATIONS){
     
     scale_x_continuous(expand=c(0,0))+
     scale_y_continuous(expand = c(0.000, 0), limits = c(0, 6.5))+
-    labs(title=UPDATING.TITLE, y="density", x="Sidney's diagnostic power P")+
+    labs(title=UPDATING.TITLE, y="density", x="Sidney's diagnostic accuracy P")+
     
     geom_segment(aes(x = x[which.max(prior)] , y = 0, xend = x[which.max(prior)], yend = max(prior)), colour=PRIOR_COLOR, lwd=0.6, linetype="dotted")+
     geom_segment(aes(x = x[which.max(likelihood)] , y = 0, xend = x[which.max(likelihood)], yend = max(likelihood)), colour=LIKELIHOOD_COLOR, lwd=0.6, linetype="dotted")+
@@ -279,8 +279,8 @@ for (i in 1:N_UPDATING_ITERATIONS){
 } # end for
 
 GRID_LABELS = paste("Inference #", 1:N_UPDATING_ITERATIONS, ": ", Ks, "/", n, " right diagnoses", sep="") # build labels of the plot grid
-p.updating = plot_grid(plotlist = plots, ncol=1, labels=GRID_LABELS) # build grid
-save_plot("figures/updating.png", p.updating, nrow = N_UPDATING_ITERATIONS)
+p.updating = plot_grid(plotlist = plots, nrow=1, labels=GRID_LABELS) # build grid
+save_plot("figures/updating.png", p.updating, ncol = N_UPDATING_ITERATIONS)
 
 ###:###:###:###:###:###:###:###:### END SECTION
 
